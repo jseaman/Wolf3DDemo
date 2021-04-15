@@ -39,6 +39,19 @@ int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
+typedef struct
+{
+    float x;
+    float y;
+    int turnDirection;
+    int walkDirection;
+    float rotationAngle;
+    float walkSpeed;
+    float turnSpeed;
+} player_t;
+
+player_t player;
+
 bool initializeSDL()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -79,7 +92,19 @@ bool initializeSDL()
 
 bool setup()
 {
-    return initializeSDL();
+    if (!initializeSDL())
+        return false;
+
+    player.x = TILE_SIZE * MAP_NUM_COLS / 2.0f;
+    player.y = TILE_SIZE * MAP_NUM_ROWS / 2.0f;
+
+    player.turnDirection = 0;
+    player.walkDirection = 0;
+    player.rotationAngle = M_PI/2;
+    player.walkSpeed = 150;
+    player.turnSpeed = 45 * M_PI / 180;
+
+    return true;
 }
 
 void processInput()
@@ -132,6 +157,16 @@ void render()
             SDL_SetRenderDrawColor(renderer, 128, 0, 0, 255);
             SDL_RenderDrawRect(renderer, &rect);
         }
+
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    rect.x = player.x-2;
+    rect.y = player.y-2;
+    rect.w = 5;
+    rect.h = 5;
+
+    SDL_RenderDrawLine(renderer, player.x, player.y, player.x + 40 * cos(player.rotationAngle), player.y + 40 * sin(player.rotationAngle));
+
+    SDL_RenderFillRect(renderer, &rect);
 
     SDL_RenderPresent(renderer);
 }
