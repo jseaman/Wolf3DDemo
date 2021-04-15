@@ -8,11 +8,13 @@
 #include <SDL.h>
 #undef main
 
-
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 
 bool isGameRunning = true;
+
+int fullScreenWidth;
+int fullScreenHeight;
 
 bool initializeSDL()
 {
@@ -24,8 +26,8 @@ bool initializeSDL()
 
     SDL_DisplayMode displayMode;
     SDL_GetCurrentDisplayMode(0, &displayMode);
-    int fullScreenWidth = displayMode.w;
-    int fullScreenHeight = displayMode.h;
+    fullScreenWidth = displayMode.w;
+    fullScreenHeight = displayMode.h;
 
     window = SDL_CreateWindow(
         "Wolf3D Demo",
@@ -83,6 +85,27 @@ void update()
 
 void render()
 {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 100;
+    rect.h = 100;
+
+    SDL_RenderFillRect(renderer, &rect);
+
+    rect.x = 200;
+    rect.y = 200;
+
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+
+    SDL_RenderFillRect(renderer, &rect);
+
+    SDL_RenderPresent(renderer);
 }
 
 void releaseResources()
