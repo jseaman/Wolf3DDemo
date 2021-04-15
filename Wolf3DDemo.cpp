@@ -2,10 +2,47 @@
 //
 
 #include <iostream>
+#include <stdbool.h>
+
+bool isGameRunning = true;
+
+void setup()
+{
+
+}
+
+void processInput()
+{
+
+}
+
+void update()
+{
+
+}
+
+void render()
+{
+    std::cout << "Estoy jugando" << std::endl;
+}
+
+void releaseResources()
+{
+
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    setup();
+
+    while (isGameRunning)
+    {
+        processInput();
+        update();
+        render();
+    }
+
+    releaseResources();
 
     return 0;
 }
