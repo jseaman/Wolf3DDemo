@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Player.h"
 #include <math.h>
+#include "Utils.h"
 
 static Player* player = nullptr;
 
@@ -16,11 +17,18 @@ Player::Player()
     walkDirection = 0;
     rotationAngle = M_PI / 2;
     walkSpeed = 150;
-    turnSpeed = 45 * M_PI / 180;
+    turnSpeed = 65 * M_PI / 180;
 }
 
 void Player::update(float deltaTime)
 {
+    rotationAngle += turnDirection * turnSpeed * deltaTime;
+    normalizeAngle(&rotationAngle);
+
+    float moveStep = walkDirection * walkSpeed * deltaTime;
+
+    x += cos(rotationAngle) * moveStep;
+    y += sin(rotationAngle) * moveStep;
 }
 
 void Player::render()
