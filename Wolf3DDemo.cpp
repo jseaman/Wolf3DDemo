@@ -11,12 +11,10 @@
 #undef main
 
 bool isGameRunning = true;
-MiniMap* map = nullptr;
 uint32_t ticksLastFrame = 0;
 
 bool setup()
 {
-    map = new MiniMap();
     return true;
 }
 
@@ -78,7 +76,7 @@ void render()
 {
     Graphics::get()->clearScreen();
     
-    map->render();
+    MiniMap::get()->render();
     Player::get()->render();
     
     Graphics::get()->render();
@@ -86,7 +84,7 @@ void render()
 
 void releaseResources()
 {
-    delete map;
+    delete MiniMap::get();
     delete Player::get();
     delete Graphics::get();
 }

@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Player.h"
 #include <math.h>
+#include "MiniMap.h"
 #include "Utils.h"
 
 static Player* player = nullptr;
@@ -27,8 +28,14 @@ void Player::update(float deltaTime)
 
     float moveStep = walkDirection * walkSpeed * deltaTime;
 
-    x += cos(rotationAngle) * moveStep;
-    y += sin(rotationAngle) * moveStep;
+    float newPlayerX = x + cos(rotationAngle) * moveStep;
+    float newPlayerY = y + sin(rotationAngle) * moveStep;
+
+    if (!MiniMap::get()->hasWallAt(newPlayerX, newPlayerY))
+    {
+        x = newPlayerX;
+        y = newPlayerY;
+    }
 }
 
 void Player::render()
