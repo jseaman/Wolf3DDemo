@@ -76,8 +76,11 @@ void update()
 
 void render()
 {
+    Graphics::get()->clearScreen();
+    
     map->render();
     Player::get()->render();
+    
     Graphics::get()->render();
 }
 
