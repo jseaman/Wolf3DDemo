@@ -46,12 +46,17 @@ void Player::render()
     g->setDrawingColor(0, 255, 0, 255);
     
     g->drawLine(
-        player->x, 
-        player->y, 
-        round(player->x + 40 * cos(player->rotationAngle)), 
-        round(player->y + 40 * sin(player->rotationAngle)));
+        player->x * MINIMAP_SCALE,
+        player->y * MINIMAP_SCALE,
+        round(player->x + 40 * cos(player->rotationAngle)) * MINIMAP_SCALE,
+        round(player->y + 40 * sin(player->rotationAngle)) * MINIMAP_SCALE
+    );
 
-    g->drawFilledRectangle(player->x - 2, player->y - 2, 5, 5);
+    g->drawFilledRectangle(
+        (player->x - 2) * MINIMAP_SCALE,
+        (player->y - 2) * MINIMAP_SCALE,
+        5 * MINIMAP_SCALE,
+        5 * MINIMAP_SCALE);
 }
 
 Player* Player::get()

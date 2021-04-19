@@ -185,7 +185,11 @@ void RayCaster::render()
 	Graphics::get()->setDrawingColor(255, 255, 0, 128);
 
 	for (int i = 0; i < rays.size(); i += 50)
-		Graphics::get()->drawLine(player->x, player->y, rays[i].wallHitX, rays[i].wallHitY);
+		Graphics::get()->drawLine(
+			player->x * MINIMAP_SCALE,
+			player->y * MINIMAP_SCALE,
+			rays[i].wallHitX * MINIMAP_SCALE,
+			rays[i].wallHitY * MINIMAP_SCALE);
 }
 
 

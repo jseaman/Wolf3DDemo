@@ -55,10 +55,21 @@ void MiniMap::render()
             else
                 g->setDrawingColor(255, 255, 255, 255);
 
-            g->drawFilledRectangle(x, y, TILE_SIZE, TILE_SIZE);
+            g->drawFilledRectangle(
+                x * MINIMAP_SCALE, 
+                y * MINIMAP_SCALE,
+                TILE_SIZE * MINIMAP_SCALE,
+                TILE_SIZE * MINIMAP_SCALE
+            );
 
             g->setDrawingColor(128, 0, 0, 255);
-            g->drawRectangle(x, y, TILE_SIZE, TILE_SIZE);
+            
+            g->drawRectangle(
+                x * MINIMAP_SCALE,
+                y * MINIMAP_SCALE,
+                TILE_SIZE * MINIMAP_SCALE,
+                TILE_SIZE * MINIMAP_SCALE
+            );
         }
 }
 

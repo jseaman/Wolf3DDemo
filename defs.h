@@ -13,3 +13,5 @@
 #define FOV_ANGLE (60 * M_PI / 180)
 
 #define STRIP_LENGTH 1
+
+#define MINIMAP_SCALE 0.2f
