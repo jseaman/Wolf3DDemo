@@ -6,6 +6,7 @@
 #include "Graphics.h"
 #include "MiniMap.h"
 #include "Player.h"
+#include "RayCaster.h"
 #include "defs.h"
 #include <SDL.h>
 #undef main
@@ -70,6 +71,7 @@ void update()
     ticksLastFrame = SDL_GetTicks();
 
     Player::get()->update(deltaTime);
+    RayCaster::get()->update(deltaTime);
 }
 
 void render()
@@ -78,6 +80,7 @@ void render()
     
     MiniMap::get()->render();
     Player::get()->render();
+    RayCaster::get()->render();
     
     Graphics::get()->render();
 }
