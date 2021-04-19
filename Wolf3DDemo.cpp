@@ -78,9 +78,10 @@ void render()
 {
     Graphics::get()->clearScreen();
     
+    RayCaster::get()->render();
+    
     MiniMap::get()->render();
     Player::get()->render();
-    RayCaster::get()->render();
     
     Graphics::get()->render();
 }

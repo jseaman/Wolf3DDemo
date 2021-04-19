@@ -12,6 +12,10 @@ class MiniMap :
 
         bool hasWallAt(float x, float y);
 
+    protected:
+        void renderMiniMapRays();
+        void renderMiniMap();
+
     private:
         MiniMap();
 };

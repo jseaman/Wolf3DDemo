@@ -17,9 +17,13 @@ class RayCaster
 		virtual void update(float deltaTime) override;
 		virtual void render() override;
 
+		int getRayNumber();
+		Ray operator [] (int index);
+
 	protected:
 		void castRay(float rayAngle, int stripId);
 		bool isInsideMap(float x, float y);
+		void renderWalls();
 
 	private:
 		RayCaster();

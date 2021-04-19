@@ -1,6 +1,9 @@
 #include "MiniMap.h"
 #include "defs.h"
 #include "Graphics.h"
+#include "Player.h"
+#include "RayCaster.h"
+#include "Ray.h"
 #include <math.h>
 
 static MiniMap* miniMap = nullptr;
@@ -40,9 +43,17 @@ void MiniMap::update(float deltaTime)
 {
 }
 
-void MiniMap::render()
+void MiniMap::renderMiniMap()
 {
     auto g = Graphics::get();
+
+    g->setDrawingColor(0, 0, 0, 255);
+    g->drawFilledRectangle(
+        0,
+        0,
+        MAP_NUM_COLS * TILE_SIZE * MINIMAP_SCALE,
+        MAP_NUM_ROWS * TILE_SIZE * MINIMAP_SCALE
+    );
 
     for (int i = 0; i < MAP_NUM_ROWS; i++)
         for (int j = 0; j < MAP_NUM_COLS; j++)
@@ -56,14 +67,14 @@ void MiniMap::render()
                 g->setDrawingColor(255, 255, 255, 255);
 
             g->drawFilledRectangle(
-                x * MINIMAP_SCALE, 
+                x * MINIMAP_SCALE,
                 y * MINIMAP_SCALE,
                 TILE_SIZE * MINIMAP_SCALE,
                 TILE_SIZE * MINIMAP_SCALE
             );
 
             g->setDrawingColor(128, 0, 0, 255);
-            
+
             g->drawRectangle(
                 x * MINIMAP_SCALE,
                 y * MINIMAP_SCALE,
@@ -71,6 +82,27 @@ void MiniMap::render()
                 TILE_SIZE * MINIMAP_SCALE
             );
         }
+}
+
+void MiniMap::renderMiniMapRays()
+{
+    auto player = Player::get();
+    auto rays = *RayCaster::get();
+
+    Graphics::get()->setDrawingColor(255, 255, 0, 128);
+
+    for (int i = 0; i < rays.getRayNumber(); i += 15)
+        Graphics::get()->drawLine(
+            player->x * MINIMAP_SCALE,
+            player->y * MINIMAP_SCALE,
+            rays[i].wallHitX * MINIMAP_SCALE,
+            rays[i].wallHitY * MINIMAP_SCALE);
+}
+
+void MiniMap::render()
+{
+    renderMiniMap();
+    renderMiniMapRays();
 }
 
 bool MiniMap::hasWallAt(float x, float y)

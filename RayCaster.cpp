@@ -173,6 +173,27 @@ bool RayCaster::isInsideMap(float x, float y)
 	return x >= 0 && x <= MAP_NUM_COLS * TILE_SIZE && y >= 0 && y <= MAP_NUM_ROWS * TILE_SIZE;
 }
 
+
+void RayCaster::renderWalls()
+{
+	float distanceToProjPlane = (Graphics::get()->getScreenWidth() / 2.0f) / tan(FOV_ANGLE / 2.0f);
+	float middleScreenVert = Graphics::get()->getScreenHeight() / 2.0f;
+
+	Graphics::get()->setDrawingColor(255, 255, 255, 255);
+
+	for (int i = 0; i < rays.size(); i++)
+	{
+		float projWallSize = TILE_SIZE / rays[i].distance * distanceToProjPlane;
+
+		float x = i * STRIP_LENGTH;
+		float y = middleScreenVert - projWallSize / 2.0f;
+		float w = STRIP_LENGTH;
+		float h = projWallSize;
+
+		Graphics::get()->drawFilledRectangle(x, y, w, h);
+	}
+}
+
 void RayCaster::update(float deltaTime)
 {
 	castAllRays();
@@ -180,16 +201,17 @@ void RayCaster::update(float deltaTime)
 
 void RayCaster::render()
 {
-	auto player = Player::get();
+	renderWalls();
+}
 
-	Graphics::get()->setDrawingColor(255, 255, 0, 128);
+int RayCaster::getRayNumber()
+{
+	return rays.size();
+}
 
-	for (int i = 0; i < rays.size(); i += 50)
-		Graphics::get()->drawLine(
-			player->x * MINIMAP_SCALE,
-			player->y * MINIMAP_SCALE,
-			rays[i].wallHitX * MINIMAP_SCALE,
-			rays[i].wallHitY * MINIMAP_SCALE);
+Ray RayCaster::operator[](int index)
+{
+	return rays[index];
 }
 
 
