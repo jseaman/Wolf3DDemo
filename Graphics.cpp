@@ -91,6 +91,8 @@ void Graphics::initializeSDL()
 
     if (!renderer)
         throw std::logic_error("Error creating SDL renderer");
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 }
 
 Graphics::~Graphics()

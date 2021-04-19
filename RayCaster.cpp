@@ -190,6 +190,14 @@ void RayCaster::renderWalls()
 		float w = STRIP_LENGTH;
 		float h = projWallSize;
 
+		float alpha = (1-rays[i].distance/ Graphics::get()->getScreenWidth()) * 255;
+
+		if (rays[i].wasHitVertical)
+			Graphics::get()->setDrawingColor(128, 128, 128, alpha);
+		else 
+			Graphics::get()->setDrawingColor(255, 255, 255, alpha);
+			
+
 		Graphics::get()->drawFilledRectangle(x, y, w, h);
 	}
 }
