@@ -183,7 +183,8 @@ void RayCaster::renderWalls()
 
 	for (int i = 0; i < rays.size(); i++)
 	{
-		float projWallSize = TILE_SIZE / rays[i].distance * distanceToProjPlane;
+		float correctedDistance = rays[i].distance * cos(Player::get()->rotationAngle - rays[i].rayAngle);
+		float projWallSize = TILE_SIZE / correctedDistance * distanceToProjPlane;
 
 		float x = i * STRIP_LENGTH;
 		float y = middleScreenVert - projWallSize / 2.0f;
