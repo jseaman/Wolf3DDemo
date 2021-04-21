@@ -16,6 +16,9 @@ class Graphics
 
 		~Graphics();
 
+	protected:
+		void drawPixel(int x, int y);
+
 	private:
 		Graphics();
 		void initializeSDL();

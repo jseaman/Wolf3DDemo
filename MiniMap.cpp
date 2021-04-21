@@ -91,7 +91,7 @@ void MiniMap::renderMiniMapRays()
 
     Graphics::get()->setDrawingColor(255, 255, 0, 128);
 
-    for (int i = 0; i < rays.getRayNumber(); i += 15)
+    for (int i = 0; i < rays.getRayNumber(); i += 10)
         Graphics::get()->drawLine(
             player->x * MINIMAP_SCALE,
             player->y * MINIMAP_SCALE,
