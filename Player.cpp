@@ -24,7 +24,7 @@ Player::Player()
 void Player::update(float deltaTime)
 {
     rotationAngle += turnDirection * turnSpeed * deltaTime;
-    normalizeAngle(&rotationAngle);
+    normalizeAngle(rotationAngle);
 
     float moveStep = walkDirection * walkSpeed * deltaTime;
 

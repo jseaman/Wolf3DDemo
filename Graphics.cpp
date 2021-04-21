@@ -79,6 +79,11 @@ void Graphics::setDrawingColor(int r, int g, int b, int a)
     drawingColor |= r;
 }
 
+void Graphics::setDrawingColor(uint32_t color)
+{
+    drawingColor = color;
+}
+
 void Graphics::drawPixel(int x, int y)
 {
     if (x < 0 || x >= RESOLUTION_WIDTH || y < 0 || y >= RESOLUTION_HEIGHT)
@@ -166,12 +171,12 @@ void Graphics::render()
     SDL_RenderPresent(renderer);
 }
 
-int Graphics::getScreenWidth()
+const int Graphics::getScreenWidth()
 {
     return RESOLUTION_WIDTH;
 }
 
-int Graphics::getScreenHeight()
+const int Graphics::getScreenHeight()
 {
     return RESOLUTION_HEIGHT;
 }

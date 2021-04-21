@@ -4,20 +4,24 @@
 #include "MiniMap.h"
 #include "defs.h"
 #include "Utils.h"
+#include "Texture.h"
 
 static RayCaster* rayCaster = nullptr;
 
 RayCaster::RayCaster()
 {
-	int numRays = Graphics::get()->getScreenWidth() / STRIP_LENGTH;
+	int numRays = Graphics::get()->getScreenWidth();
 
 	for (int i = 0; i < numRays; i++)
 		rays.push_back(Ray());
+
+	texture = new Texture("images/bluestone.png");
 }
 
 RayCaster::~RayCaster()
 {
 	rays.clear();
+	delete texture;
 }
 
 RayCaster* RayCaster::get()
@@ -41,7 +45,7 @@ void RayCaster::castAllRays()
 
 void RayCaster::castRay(float rayAngle, int stripId)
 {
-	normalizeAngle(&rayAngle);
+	normalizeAngle(rayAngle);
 	rays[stripId].rayAngle = rayAngle;
 
 	float xintercept, yintercept;
@@ -176,30 +180,63 @@ bool RayCaster::isInsideMap(float x, float y)
 
 void RayCaster::renderWalls()
 {
+	auto g = Graphics::get();
+
 	float distanceToProjPlane = (Graphics::get()->getScreenWidth() / 2.0f) / tan(FOV_ANGLE / 2.0f);
 	float middleScreenVert = Graphics::get()->getScreenHeight() / 2.0f;
 
 	Graphics::get()->setDrawingColor(255, 255, 255, 255);
 
-	for (int i = 0; i < rays.size(); i++)
+	for (int x = 0; x < rays.size(); x++)
 	{
-		float correctedDistance = rays[i].distance * cos(Player::get()->rotationAngle - rays[i].rayAngle);
-		float projWallSize = TILE_SIZE / correctedDistance * distanceToProjPlane;
+		float correctedDistance = rays[x].distance * cos(Player::get()->rotationAngle - rays[x].rayAngle);
+		float projWallHeight = TILE_SIZE / correctedDistance * distanceToProjPlane;
 
-		float x = i * STRIP_LENGTH;
-		float y = middleScreenVert - projWallSize / 2.0f;
-		float w = STRIP_LENGTH;
-		float h = projWallSize;
+		int wallStripHeight = (int)projWallHeight;
 
-		float alpha = (1-rays[i].distance/ Graphics::get()->getScreenWidth()) * 255;
+		// calculate top Y value
+		int wallTopPixel = g->getScreenHeight() / 2 - wallStripHeight / 2;
+		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
 
-		if (rays[i].wasHitVertical)
-			Graphics::get()->setDrawingColor(128, 128, 128, alpha);
-		else 
-			Graphics::get()->setDrawingColor(255, 255, 255, alpha);
-			
+		// calculate bottom Y value
+		int wallBottomPixel = g->getScreenHeight() / 2 + wallStripHeight / 2;
+		wallBottomPixel = wallBottomPixel > g->getScreenHeight() ? g->getScreenHeight() : wallBottomPixel;
 
-		Graphics::get()->drawFilledRectangle(x, y, w, h);
+		// calculate texture offset X
+		int textureOffsetX;
+
+		if (rays[x].wasHitVertical)
+			textureOffsetX = (int)rays[x].wallHitY % TILE_SIZE;
+		else
+			textureOffsetX = (int)rays[x].wallHitX % TILE_SIZE;
+
+		for (int y = 0; y < g->getScreenHeight(); y++)
+		{
+			if (y < wallTopPixel)
+			{				
+				g->setDrawingColor(0xff444444);
+				g->drawPixel(x, y);
+			}
+			else if (y < wallBottomPixel)
+			{
+				// calculate texture offset Y
+				int distanceFromTop = y + wallStripHeight / 2 - g->getScreenHeight() / 2;
+				int textureOffsetY = distanceFromTop * ((float)texture->getTextureHeight() / wallStripHeight);
+
+				uint32_t texelColor = texture->getValueAt(textureOffsetX, textureOffsetY);
+
+				if (rays[x].wasHitVertical)
+					changeColorIntensity(texelColor, 0.7f);
+
+				g->setDrawingColor(texelColor);
+				g->drawPixel(x, y);
+			}
+			else
+			{
+				g->setDrawingColor(0xff888888);
+				g->drawPixel(x, y);
+			}
+		}
 	}
 }
 

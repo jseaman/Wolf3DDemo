@@ -87,16 +87,16 @@ void MiniMap::renderMiniMap()
 void MiniMap::renderMiniMapRays()
 {
     auto player = Player::get();
-    auto rays = *RayCaster::get();
+    auto rays = RayCaster::get();
 
     Graphics::get()->setDrawingColor(255, 255, 0, 128);
 
-    for (int i = 0; i < rays.getRayNumber(); i += 10)
+    for (int i = 0; i < rays->getRayNumber(); i += 50)
         Graphics::get()->drawLine(
             player->x * MINIMAP_SCALE,
             player->y * MINIMAP_SCALE,
-            rays[i].wallHitX * MINIMAP_SCALE,
-            rays[i].wallHitY * MINIMAP_SCALE);
+            (*rays)[i].wallHitX * MINIMAP_SCALE,
+            (*rays)[i].wallHitY * MINIMAP_SCALE);
 }
 
 void MiniMap::render()

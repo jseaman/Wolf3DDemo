@@ -88,6 +88,7 @@ void render()
 
 void releaseResources()
 {
+    delete RayCaster::get();
     delete MiniMap::get();
     delete Player::get();
     delete Graphics::get();
