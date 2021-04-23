@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "RayCaster.h"
 #include "TextureLoader.h"
+#include "SpriteManager.h"
 #include "defs.h"
 #include <SDL.h>
 #undef main
@@ -19,6 +20,7 @@ bool setup()
 {
     Graphics::get();
     TextureLoader::get();
+    SpriteManager::get();
     MiniMap::get();
     RayCaster::get();
     Player::get();
@@ -87,6 +89,8 @@ void render()
     
     RayCaster::get()->render();
     
+    SpriteManager::get()->renderSprites();
+
     MiniMap::get()->render();
     Player::get()->render();
     

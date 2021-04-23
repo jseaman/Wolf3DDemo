@@ -14,7 +14,13 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Images">
-      <UniqueIdentifier>{76912651-4483-4ce6-8065-390660af1323}</UniqueIdentifier>
+      <UniqueIdentifier>{15081e92-5088-4b36-808a-678a61d6c4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\Wall Tiles">
+      <UniqueIdentifier>{829c1d0a-6b9d-4206-b0a9-ef7001ef8061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\Sprites">
+      <UniqueIdentifier>{8f90f920-d6c0-4879-bf02-2a53cc91031a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +55,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,43 +101,70 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\bluestone.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\bluestone.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\colorstone.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\colorstone.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\eagle.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\eagle.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\graystone.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\graystone.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\johitler.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\johitler.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\mossystone.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\mossystone.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\partidonazional.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\partidonazional.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\purplestone.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\purplestone.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\redbrick.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\redbrick.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\wood.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\wood.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\woodHitler.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\woodHitler.png">
+      <Filter>Images\Wall Tiles</Filter>
     </Image>
-    <Image Include="images\woodSwastika.png">
-      <Filter>Images</Filter>
+    <Image Include="tiles\woodSwastika.png">
+      <Filter>Images\Wall Tiles</Filter>
+    </Image>
+    <Image Include="sprites\armor.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\barrel.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\fps_gun.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\guard.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\guard_shoot.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\light.png">
+      <Filter>Images\Sprites</Filter>
+    </Image>
+    <Image Include="sprites\table.png">
+      <Filter>Images\Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>

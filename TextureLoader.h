@@ -1,6 +1,9 @@
 #pragma once
 
 class Texture;
+#include <map>
+#include <vector>
+#include <string>
 
 class TextureLoader
 {
@@ -9,12 +12,15 @@ class TextureLoader
 
 		static TextureLoader* get();
 
-		Texture* getTexture(const char* textureName);
-		Texture* getTexture(int index);
+		Texture* getWallTexture(const char* textureName);
+		Texture* getWallTexture(int index);
+
+		Texture* getSpriteTexture(const char* textureName);
+		Texture* getSpriteTexture(int index);
 
 	private:
 		TextureLoader();
 		
-		void loadAllTextures();
+		void loadAllTextures(const char* directory, std::map<std::string, Texture*>& textureDict, std::vector<Texture*>& textureVect);
 };
 

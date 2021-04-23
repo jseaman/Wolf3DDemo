@@ -146,6 +146,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayCaster.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="upng.c" />
@@ -163,24 +165,33 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayCaster.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="upng.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\bluestone.png" />
-    <Image Include="images\colorstone.png" />
-    <Image Include="images\eagle.png" />
-    <Image Include="images\graystone.png" />
-    <Image Include="images\johitler.png" />
-    <Image Include="images\mossystone.png" />
-    <Image Include="images\partidonazional.png" />
-    <Image Include="images\purplestone.png" />
-    <Image Include="images\redbrick.png" />
-    <Image Include="images\wood.png" />
-    <Image Include="images\woodHitler.png" />
-    <Image Include="images\woodSwastika.png" />
+    <Image Include="sprites\armor.png" />
+    <Image Include="sprites\barrel.png" />
+    <Image Include="sprites\fps_gun.png" />
+    <Image Include="sprites\guard.png" />
+    <Image Include="sprites\guard_shoot.png" />
+    <Image Include="sprites\light.png" />
+    <Image Include="sprites\table.png" />
+    <Image Include="tiles\bluestone.png" />
+    <Image Include="tiles\colorstone.png" />
+    <Image Include="tiles\eagle.png" />
+    <Image Include="tiles\graystone.png" />
+    <Image Include="tiles\johitler.png" />
+    <Image Include="tiles\mossystone.png" />
+    <Image Include="tiles\partidonazional.png" />
+    <Image Include="tiles\purplestone.png" />
+    <Image Include="tiles\redbrick.png" />
+    <Image Include="tiles\wood.png" />
+    <Image Include="tiles\woodHitler.png" />
+    <Image Include="tiles\woodSwastika.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

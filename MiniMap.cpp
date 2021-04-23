@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "RayCaster.h"
 #include "Ray.h"
+#include "Sprite.h"
+#include "SpriteManager.h"
+#include <vector>
 #include <math.h>
 
 static MiniMap* miniMap = nullptr;
@@ -26,9 +29,11 @@ static int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
     {10, 11, 10, 9, 9, 9, 3, 9, 3, 9, 9, 9, 9, 10, 12, 10},
 };
 
+static std::vector<Sprite*> sprites;
+
 MiniMap::MiniMap()
 {
-
+    SpriteManager::get()->getAllSprites(sprites);
 }
 
 MiniMap* MiniMap::get()
@@ -88,21 +93,43 @@ void MiniMap::renderMiniMapRays()
 {
     auto player = Player::get();
     auto rays = RayCaster::get();
+    auto g = Graphics::get();
 
-    Graphics::get()->setDrawingColor(255, 255, 0, 128);
+    g->setDrawingColor(255, 255, 0, 128);
 
     for (int i = 0; i < rays->getRayNumber(); i += 50)
-        Graphics::get()->drawLine(
+        g->drawLine(
             player->x * MINIMAP_SCALE,
             player->y * MINIMAP_SCALE,
             (*rays)[i].wallHitX * MINIMAP_SCALE,
             (*rays)[i].wallHitY * MINIMAP_SCALE);
 }
 
+void MiniMap::renderMiniMapSprites()
+{
+    auto g = Graphics::get();
+
+    for (auto sprite : sprites)
+    {
+        if (sprite->visible)
+            g->setDrawingColor(0, 255, 0, 255);
+        else
+            g->setDrawingColor(255, 0, 0, 0);
+
+        g->drawFilledRectangle(
+            sprite->x * MINIMAP_SCALE,
+            sprite->y * MINIMAP_SCALE,
+            2,
+            2
+        );
+    }
+}
+
 void MiniMap::render()
 {
     renderMiniMap();
     renderMiniMapRays();
+    renderMiniMapSprites();
 }
 
 bool MiniMap::hasWallAt(float x, float y)

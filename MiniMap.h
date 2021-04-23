@@ -14,8 +14,9 @@ class MiniMap :
         int getMapValueAt(float x, float y);
 
     protected:
-        void renderMiniMapRays();
         void renderMiniMap();
+        void renderMiniMapRays();
+        void renderMiniMapSprites();
 
     private:
         MiniMap();

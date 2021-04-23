@@ -222,7 +222,7 @@ void RayCaster::renderWalls()
 			else if (y < wallBottomPixel)
 			{
 				// get texture according to map
-				auto texture = TextureLoader::get()->getTexture(rays[x].mapValue);
+				auto texture = TextureLoader::get()->getWallTexture(rays[x].mapValue);
 
 				// calculate texture offset Y
 				int distanceFromTop = y + wallStripHeight / 2 - g->getScreenHeight() / 2;
