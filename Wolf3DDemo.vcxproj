@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayCaster.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="upng.c" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Wolf3DDemo.cpp" />
@@ -162,11 +164,23 @@
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayCaster.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="upng.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bluestone.png" />
+    <Image Include="images\colorstone.png" />
+    <Image Include="images\eagle.png" />
+    <Image Include="images\graystone.png" />
+    <Image Include="images\johitler.png" />
+    <Image Include="images\mossystone.png" />
+    <Image Include="images\partidonazional.png" />
+    <Image Include="images\purplestone.png" />
+    <Image Include="images\redbrick.png" />
+    <Image Include="images\wood.png" />
+    <Image Include="images\woodHitler.png" />
+    <Image Include="images\woodSwastika.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

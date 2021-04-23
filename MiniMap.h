@@ -11,6 +11,7 @@ class MiniMap :
         virtual void render() override;
 
         bool hasWallAt(float x, float y);
+        int getMapValueAt(float x, float y);
 
     protected:
         void renderMiniMapRays();

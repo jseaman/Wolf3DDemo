@@ -30,6 +30,5 @@ class RayCaster
 	private:
 		RayCaster();
 		std::vector<Ray> rays;
-		Texture *texture;
 };
 

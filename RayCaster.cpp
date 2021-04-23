@@ -4,6 +4,7 @@
 #include "MiniMap.h"
 #include "defs.h"
 #include "Utils.h"
+#include "TextureLoader.h"
 #include "Texture.h"
 
 static RayCaster* rayCaster = nullptr;
@@ -14,14 +15,11 @@ RayCaster::RayCaster()
 
 	for (int i = 0; i < numRays; i++)
 		rays.push_back(Ray());
-
-	texture = new Texture("images/bluestone.png");
 }
 
 RayCaster::~RayCaster()
 {
 	rays.clear();
-	delete texture;
 }
 
 RayCaster* RayCaster::get()
@@ -87,6 +85,7 @@ void RayCaster::castRay(float rayAngle, int stripId)
 			foundHorzWallHit = true;
 			horzWallHitX = nextHorzTouchX;
 			horzWallHitY = nextHorzTouchY;
+			horzWallContent = MiniMap::get()->getMapValueAt(xToCheck, yToCheck);
 
 			break;
 		}
@@ -134,6 +133,7 @@ void RayCaster::castRay(float rayAngle, int stripId)
 			foundVertWallHit = true;
 			vertWallHitX = nextVertTouchX;
 			vertWallHitY = nextVertTouchY;
+			vertWallContent = MiniMap::get()->getMapValueAt(xToCheck, yToCheck);
 
 			break;
 		}
@@ -160,6 +160,7 @@ void RayCaster::castRay(float rayAngle, int stripId)
 		rays[stripId].wallHitX = horzWallHitX;
 		rays[stripId].wallHitY = horzWallHitY;
 		rays[stripId].wasHitVertical = false;
+		rays[stripId].mapValue = horzWallContent;
 	}
 	else
 	{
@@ -167,6 +168,7 @@ void RayCaster::castRay(float rayAngle, int stripId)
 		rays[stripId].wallHitX = vertWallHitX;
 		rays[stripId].wallHitY = vertWallHitY;
 		rays[stripId].wasHitVertical = true;
+		rays[stripId].mapValue = vertWallContent;
 	}
 
 	rays[stripId].rayAngle = rayAngle;
@@ -219,6 +221,9 @@ void RayCaster::renderWalls()
 			}
 			else if (y < wallBottomPixel)
 			{
+				// get texture according to map
+				auto texture = TextureLoader::get()->getTexture(rays[x].mapValue);
+
 				// calculate texture offset Y
 				int distanceFromTop = y + wallStripHeight / 2 - g->getScreenHeight() / 2;
 				int textureOffsetY = distanceFromTop * ((float)texture->getTextureHeight() / wallStripHeight);

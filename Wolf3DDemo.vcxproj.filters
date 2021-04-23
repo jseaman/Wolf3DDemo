@@ -48,6 +48,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,9 +86,45 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bluestone.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\colorstone.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\eagle.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\graystone.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\johitler.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\mossystone.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\partidonazional.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\purplestone.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\redbrick.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\wood.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\woodHitler.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="images\woodSwastika.png">
       <Filter>Images</Filter>
     </Image>
   </ItemGroup>

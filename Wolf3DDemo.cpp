@@ -7,6 +7,7 @@
 #include "MiniMap.h"
 #include "Player.h"
 #include "RayCaster.h"
+#include "TextureLoader.h"
 #include "defs.h"
 #include <SDL.h>
 #undef main
@@ -16,6 +17,12 @@ uint32_t ticksLastFrame = 0;
 
 bool setup()
 {
+    Graphics::get();
+    TextureLoader::get();
+    MiniMap::get();
+    RayCaster::get();
+    Player::get();
+    
     return true;
 }
 
@@ -90,6 +97,7 @@ void releaseResources()
 {
     delete RayCaster::get();
     delete MiniMap::get();
+    delete TextureLoader::get();
     delete Player::get();
     delete Graphics::get();
 }

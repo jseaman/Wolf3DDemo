@@ -10,6 +10,7 @@ class Ray
 		float wallHitY;
 		float distance;
 		bool wasHitVertical;
+		int mapValue;
 
 		bool isRayFacingUp();
 		bool isRayFacingDown();

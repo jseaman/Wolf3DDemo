@@ -12,7 +12,7 @@ static Player* player = nullptr;
 Player::Player()
 {
     x = TILE_SIZE * MAP_NUM_COLS / 2.0f;
-    y = TILE_SIZE * MAP_NUM_ROWS / 2.0f;
+    y = TILE_SIZE * MAP_NUM_ROWS / 2.0f * 1.2f;
 
     turnDirection = 0;
     walkDirection = 0;
