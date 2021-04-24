@@ -184,7 +184,6 @@ void RayCaster::renderWalls()
 {
 	auto g = Graphics::get();
 
-	float distanceToProjPlane = (Graphics::get()->getScreenWidth() / 2.0f) / tan(FOV_ANGLE / 2.0f);
 	float middleScreenVert = Graphics::get()->getScreenHeight() / 2.0f;
 
 	Graphics::get()->setDrawingColor(255, 255, 255, 255);
@@ -192,7 +191,7 @@ void RayCaster::renderWalls()
 	for (int x = 0; x < rays.size(); x++)
 	{
 		float correctedDistance = rays[x].distance * cos(Player::get()->rotationAngle - rays[x].rayAngle);
-		float projWallHeight = TILE_SIZE / correctedDistance * distanceToProjPlane;
+		float projWallHeight = TILE_SIZE / correctedDistance * DIST_PROJ_PLANE;
 
 		int wallStripHeight = (int)projWallHeight;
 

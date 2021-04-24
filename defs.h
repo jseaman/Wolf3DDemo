@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL_stdinc.h>
+#include <math.h>
 
 #define TILE_SIZE 64
 
@@ -16,3 +17,5 @@
 
 #define RESOLUTION_WIDTH 800
 #define RESOLUTION_HEIGHT 600
+
+static const float DIST_PROJ_PLANE = ((RESOLUTION_WIDTH / 2) / tan(FOV_ANGLE / 2));
