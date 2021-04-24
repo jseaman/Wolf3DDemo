@@ -17,8 +17,15 @@ SpriteManager::SpriteManager()
 	barrel->y = 800;
 	barrel->texture = TextureLoader::get()->getSpriteTexture("barrel");
 
+	auto barrel2 = new Sprite();
+	barrel2->x = 510;
+	barrel2->y = 850;
+	barrel2->texture = TextureLoader::get()->getSpriteTexture("barrel");
+
 	sprites.push_back(barrel);
+	sprites.push_back(barrel2);
 }
+
 
 SpriteManager::~SpriteManager()
 {
