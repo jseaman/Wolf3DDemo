@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Graphics.h"
 #include "Texture.h"
+#include "RayCaster.h"
 
 Sprite::Sprite()
 {
@@ -20,6 +21,7 @@ void Sprite::render()
 {
 	auto player = Player::get();
 	auto g = Graphics::get();
+	RayCaster &rays = *RayCaster::get();
 
 	float perpDistance = distance * cos(angle);
 
@@ -55,9 +57,7 @@ void Sprite::render()
 
 				uint32_t texelColor = texture->getValueAt(textureOffsetX, textureOffsetY);
 
-				// TODO: occlude
-
-				if (texelColor != 0xffff00ff)
+				if (distance < rays[x].distance && texelColor != 0xffff00ff)
 				{
 					g->setDrawingColor(texelColor);
 					g->drawPixel(x, y);
