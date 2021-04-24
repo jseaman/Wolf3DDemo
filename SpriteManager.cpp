@@ -2,7 +2,6 @@
 #include "Sprite.h"
 #include "TextureLoader.h"
 #include "Player.h"
-#include "Graphics.h"
 #include "Texture.h"
 #include "defs.h"
 #include "Utils.h"
@@ -85,54 +84,18 @@ void SpriteManager::renderSprites()
 	std::vector<Sprite*> visibleSprites;
 	getVisibleSprites(visibleSprites);
 
-	auto g = Graphics::get();
-	auto player = Player::get();
-
-	for (auto sprite : visibleSprites)
-	{
-		float perpDistance = sprite->distance * cos(sprite->angle);
-
-		float spriteHeight = TILE_SIZE / perpDistance * DIST_PROJ_PLANE;
-		float spriteWidth = spriteHeight;
-
-		float spriteTopY = (g->getScreenHeight() / 2) - (spriteHeight / 2);
-		spriteTopY = spriteTopY < 0 ? 0 : spriteTopY;
-
-		float spriteBottomY = (g->getScreenHeight() / 2) + spriteHeight / 2;
-		spriteBottomY = spriteBottomY > g->getScreenHeight() ? g->getScreenHeight() : spriteBottomY;
-
-		float spriteAngle = atan2(sprite->y - player->y, sprite->x - player->x) - player->rotationAngle;
-		float spriteScreenPosX = tan(spriteAngle) * DIST_PROJ_PLANE;
-
-		float spriteLeftX = (g->getScreenWidth() / 2) + spriteScreenPosX - spriteWidth / 2;
-		float spriteRightX = spriteLeftX + spriteWidth;
-
-		int textureWidth = sprite->texture->getTextureWidth(); 
-		int textureHeight = sprite->texture->getTextureHeight(); 
-
-		for (int y = spriteTopY; y < spriteBottomY; y++)
+	// sort visible sprites
+	for (int i = 0; i < (int)visibleSprites.size() - 1; i++)
+		for (int j = i + 1; j < (int)visibleSprites.size(); j++)
 		{
-			for (int x = spriteLeftX; x < spriteRightX; x++)
+			if (visibleSprites[j]->distance > visibleSprites[i]->distance)
 			{
-				float texelWidth = textureWidth / spriteWidth;
-				int textureOffsetX = (x - spriteLeftX) * texelWidth;
-
-				if (x > 0 && x < g->getScreenWidth() && y>0 && y < g->getScreenHeight())
-				{
-					int distanceFromTop = y + spriteHeight / 2 - g->getScreenHeight() / 2;
-					int textureOffsetY = distanceFromTop * textureHeight / spriteHeight;
-
-					uint32_t texelColor = sprite->texture->getValueAt(textureOffsetX, textureOffsetY);
-
-					// TODO: occlude
-
-					if (texelColor != 0xffff00ff)
-					{
-						g->setDrawingColor(texelColor);
-						g->drawPixel(x, y);
-					}
-				}
+				auto temp = visibleSprites[i];
+				visibleSprites[i] = visibleSprites[j];
+				visibleSprites[j] = temp;
 			}
 		}
-	}
+
+	for (auto sprite : visibleSprites)
+		sprite->render();
 }
