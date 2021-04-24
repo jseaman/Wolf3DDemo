@@ -11,16 +11,40 @@ static std::vector<Sprite*> sprites;
 
 SpriteManager::SpriteManager()
 {
+	auto table = new Sprite();
+	table->x = 500;
+	table->y = 800;
+	table->texture = TextureLoader::get()->getSpriteTexture("table");
+
+	auto light = new Sprite();
+	light->x = 500;
+	light->y = 800;
+	light->texture = TextureLoader::get()->getSpriteTexture("light");
+
+	auto armor = new Sprite();
+	armor->x = TILE_SIZE * 1.5f;
+	armor->y = TILE_SIZE * 1.5f;
+	armor->texture = TextureLoader::get()->getSpriteTexture("armor");
+
+	auto armor2 = new Sprite();
+	armor2->x = MAP_NUM_COLS * TILE_SIZE - TILE_SIZE * 1.5f;
+	armor2->y = TILE_SIZE * 1.5f;
+	armor2->texture = TextureLoader::get()->getSpriteTexture("armor");
+
 	auto barrel = new Sprite();
-	barrel->x = 500;
+	barrel->x = TILE_SIZE * 4;
 	barrel->y = 800;
 	barrel->texture = TextureLoader::get()->getSpriteTexture("barrel");
 
 	auto barrel2 = new Sprite();
-	barrel2->x = 510;
-	barrel2->y = 850;
+	barrel2->x = MAP_NUM_COLS * TILE_SIZE - TILE_SIZE * 4;
+	barrel2->y = 800;
 	barrel2->texture = TextureLoader::get()->getSpriteTexture("barrel");
 
+	sprites.push_back(table);
+	sprites.push_back(light);
+	sprites.push_back(armor);
+	sprites.push_back(armor2);
 	sprites.push_back(barrel);
 	sprites.push_back(barrel2);
 }
